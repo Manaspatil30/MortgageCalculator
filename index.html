@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mortgage Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">Mortgage Planning Studio</p>
+        <h1>Estimate monthly repayments with clarity before you commit.</h1>
+        <p class="intro">
+          Compare repayment styles, review loan-to-value, and sense-check your
+          borrowing against sample scenarios.
+        </p>
+      </section>
+
+      <div class="layout">
+        <section class="panel form-panel" aria-labelledby="calculator-title">
+          <div class="panel-header">
+            <h2 id="calculator-title">Calculator</h2>
+            <button id="reset-button" class="ghost-button" type="button">
+              Reset
+            </button>
+          </div>
+
+          <form id="mortgage-form" novalidate>
+            <div class="field-grid">
+              <label class="field">
+                <span>Sample scenario</span>
+                <select id="scenario" name="scenario">
+                  <option value="">Custom calculation</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Mortgage type</span>
+                <select id="mortgageType" name="mortgageType" required>
+                  <option value="repayment">Repayment</option>
+                  <option value="interestOnly">Interest-only</option>
+                  <option value="adjustable">Adjustable estimate</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Property value</span>
+                <div class="input-wrap">
+                  <span aria-hidden="true">£</span>
+                  <input
+                    id="propertyValue"
+                    name="propertyValue"
+                    type="number"
+                    min="1"
+                    step="1000"
+                    inputmode="decimal"
+                    required
+                  />
+                </div>
+              </label>
+
+              <label class="field">
+                <span>Deposit</span>
+                <div class="input-wrap">
+                  <span aria-hidden="true">£</span>
+                  <input
+                    id="downPayment"
+                    name="downPayment"
+                    type="number"
+                    min="0"
+                    step="1000"
+                    inputmode="decimal"
+                    required
+                  />
+                </div>
+              </label>
+
+              <label class="field">
+                <span>Loan amount</span>
+                <div class="input-wrap">
+                  <span aria-hidden="true">£</span>
+                  <input
+                    id="loanAmount"
+                    name="loanAmount"
+                    type="number"
+                    min="1"
+                    step="1000"
+                    inputmode="decimal"
+                    required
+                  />
+                </div>
+              </label>
+
+              <label class="field">
+                <span>Annual interest rate</span>
+                <div class="input-wrap">
+                  <input
+                    id="interestRate"
+                    name="interestRate"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    inputmode="decimal"
+                    required
+                  />
+                  <span aria-hidden="true">%</span>
+                </div>
+              </label>
+
+              <label class="field">
+                <span>Loan term</span>
+                <div class="input-wrap">
+                  <input
+                    id="loanTerm"
+                    name="loanTerm"
+                    type="number"
+                    min="1"
+                    max="40"
+                    step="1"
+                    inputmode="numeric"
+                    required
+                  />
+                  <span aria-hidden="true">years</span>
+                </div>
+              </label>
+
+              <label class="field">
+                <span>Extra monthly payment</span>
+                <div class="input-wrap">
+                  <span aria-hidden="true">£</span>
+                  <input
+                    id="extraPayment"
+                    name="extraPayment"
+                    type="number"
+                    min="0"
+                    step="10"
+                    inputmode="decimal"
+                    value="0"
+                  />
+                </div>
+              </label>
+            </div>
+
+            <p id="form-message" class="form-message" aria-live="polite"></p>
+
+            <div class="actions">
+              <button class="primary-button" type="submit">
+                Calculate estimate
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel results-panel" aria-labelledby="results-title">
+          <div class="panel-header">
+            <h2 id="results-title">Estimate</h2>
+            <p id="rate-note" class="rate-note"></p>
+          </div>
+
+          <div class="result-highlight">
+            <p>Estimated monthly payment</p>
+            <output id="monthlyPayment">£0</output>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card">
+              <span>Total interest</span>
+              <strong id="totalInterest">£0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Total paid</span>
+              <strong id="totalPaid">£0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Loan-to-value</span>
+              <strong id="ltv">0%</strong>
+            </article>
+            <article class="stat-card">
+              <span>Projected payoff</span>
+              <strong id="payoffDate">-</strong>
+            </article>
+          </div>
+
+          <section class="summary-card" aria-labelledby="summary-title">
+            <div class="panel-header compact">
+              <h3 id="summary-title">Snapshot</h3>
+              <span id="termSummary" class="pill"></span>
+            </div>
+            <dl class="summary-list">
+              <div>
+                <dt>Base payment</dt>
+                <dd id="basePayment">£0</dd>
+              </div>
+              <div>
+                <dt>Extra payment</dt>
+                <dd id="extraPaymentSummary">£0</dd>
+              </div>
+              <div>
+                <dt>Mortgage balance</dt>
+                <dd id="loanSummary">£0</dd>
+              </div>
+              <div>
+                <dt>Deposit ratio</dt>
+                <dd id="depositRatio">0%</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section class="summary-card" aria-labelledby="amortization-title">
+            <div class="panel-header compact">
+              <h3 id="amortization-title">First-year breakdown</h3>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Month</th>
+                    <th scope="col">Principal</th>
+                    <th scope="col">Interest</th>
+                    <th scope="col">Balance</th>
+                  </tr>
+                </thead>
+                <tbody id="amortizationBody"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </div>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

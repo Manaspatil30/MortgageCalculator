@@ -1,0 +1,354 @@
+:root {
+  --bg: #f6efe4;
+  --bg-accent: #efe1cc;
+  --surface: rgba(255, 251, 245, 0.88);
+  --surface-strong: #fffdf8;
+  --ink: #1f1b16;
+  --muted: #695b4a;
+  --line: rgba(62, 45, 20, 0.12);
+  --brand: #0f766e;
+  --brand-dark: #115e59;
+  --highlight: #d97706;
+  --shadow: 0 24px 80px rgba(56, 35, 7, 0.12);
+  --radius: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(217, 119, 6, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(15, 118, 110, 0.14), transparent 30%),
+    linear-gradient(180deg, var(--bg) 0%, #f9f4ea 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(31, 27, 22, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 27, 22, 0.03) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.75), transparent);
+}
+
+.shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3rem 0 4rem;
+}
+
+.hero {
+  max-width: 720px;
+  margin-bottom: 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--brand-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.hero h1 {
+  margin: 0;
+  font-family: "Source Serif 4", serif;
+  font-size: clamp(2.6rem, 5vw, 4.6rem);
+  line-height: 0.95;
+}
+
+.intro {
+  max-width: 60ch;
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 460px) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.panel,
+.summary-card {
+  backdrop-filter: blur(12px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.panel {
+  padding: 1.5rem;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.panel-header h2,
+.panel-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.compact {
+  margin-bottom: 0.75rem;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.field span:first-child {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.field select,
+.field input,
+.ghost-button,
+.primary-button {
+  font: inherit;
+}
+
+.input-wrap,
+.field select {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3.2rem;
+  padding: 0 1rem;
+  border: 1px solid rgba(31, 27, 22, 0.12);
+  border-radius: 16px;
+  background: var(--surface-strong);
+}
+
+.field input,
+.field select {
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--ink);
+}
+
+.field input:focus,
+.field select:focus {
+  outline: none;
+}
+
+.input-wrap:focus-within,
+.field select:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.14);
+}
+
+.actions {
+  margin-top: 1.25rem;
+}
+
+.primary-button,
+.ghost-button {
+  cursor: pointer;
+  border-radius: 999px;
+  transition: transform 140ms ease, background 140ms ease;
+}
+
+.primary-button {
+  border: 0;
+  padding: 0.95rem 1.4rem;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.primary-button:hover,
+.ghost-button:hover {
+  transform: translateY(-1px);
+}
+
+.ghost-button {
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.form-message {
+  min-height: 1.3rem;
+  margin: 1rem 0 0;
+  color: #9a3412;
+}
+
+.results-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.rate-note {
+  margin: 0;
+  color: var(--muted);
+  text-align: right;
+  max-width: 28ch;
+}
+
+.result-highlight {
+  padding: 1.4rem;
+  border-radius: calc(var(--radius) - 8px);
+  background:
+    linear-gradient(135deg, rgba(15, 118, 110, 0.95), rgba(17, 94, 89, 0.9)),
+    var(--brand);
+  color: #ecfeff;
+}
+
+.result-highlight p {
+  margin: 0 0 0.55rem;
+  opacity: 0.8;
+}
+
+.result-highlight output {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.stat-card,
+.summary-card {
+  padding: 1.2rem;
+}
+
+.stat-card {
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 8px);
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.stat-card span,
+.summary-list dt {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.stat-card strong,
+.summary-list dd {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.3rem;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(217, 119, 6, 0.12);
+  color: #9a3412;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.summary-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+.summary-list div {
+  margin: 0;
+}
+
+.summary-list dt,
+.summary-list dd {
+  margin: 0;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.75rem 0;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+
+th {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .shell {
+    width: min(100% - 1rem, 100%);
+    padding-top: 1.25rem;
+  }
+
+  .panel {
+    padding: 1rem;
+  }
+
+  .field-grid,
+  .stats-grid,
+  .summary-list {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rate-note {
+    text-align: left;
+  }
+}
