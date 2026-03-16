@@ -26,41 +26,6 @@ npm start
 ```bash
 npm test
 ```
-
-## Suggested Git workflow
-
-```bash
-git add .
-git commit -m "Build mortgage calculator UI and core logic"
-git commit -m "Add tests and Azure deployment config"
-```
-
-If you are collaborating, pull before pushing:
-
-```bash
-git pull --rebase
-git push origin <branch-name>
-```
-
-## Azure deployment
-
-This project is set up to work well with Azure Static Web Apps because it is a static frontend and does not require a database or server-side runtime.
-
-### Option 1: Azure Static Web Apps
-
-1. Create a Static Web App in Azure.
-2. Point the app root to `/`.
-3. Set the output location to `/`.
-4. Deploy this repository through the Azure portal or GitHub integration.
-
-### Option 2: Azure App Service
-
-If you prefer App Service, deploy the repo and run:
-
-```bash
-npm start
-```
-
 Set the startup command to `npm start` and ensure the `PORT` app setting is available.
 
 ## Testing checklist
